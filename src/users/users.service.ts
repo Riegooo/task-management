@@ -37,7 +37,11 @@ export class UsersService {
 
         const result_create = await this.databaseService.query(sql_create, [username, email, hash_password]);
 
-        return result_create.rows[0];
+        return {
+            success: true,
+            message: "Create Account Successfully",
+            data: result_create.rows[0]
+        }
     }
 
 
