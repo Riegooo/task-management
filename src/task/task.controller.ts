@@ -19,5 +19,10 @@ export class TaskController {
         return this.taskService.createTask(createTaskDto);
     }
 
+    @Get('/alltask')
+    getAllTask() {
+        return  this.taskService.showAllTask();
+    }
+
 }
 

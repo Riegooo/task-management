@@ -31,4 +31,16 @@ export class TaskService {
 
     }
 
+    async showAllTask() {
+        
+        const sql_all_task = `
+            SELECT * FROM tasks;
+        `;
+
+        const all_task_result = await this.databaseService.query(sql_all_task);
+
+        return all_task_result.rows;
+
+    }
+
 }
