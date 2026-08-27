@@ -13,9 +13,9 @@ export class TaskService {
             SELECT id FROM users WHERE id = $1;
         `;
 
-        const user_result = await this.databaseService.query(sql_user, [user_id]);
+        const user_result_id = await this.databaseService.query(sql_user, [user_id]);
 
-        if (user_result.rows.length === 0) {
+        if (user_result_id.rows.length === 0) {
             throw new BadRequestException(
                 'User does not exist.'
             )
