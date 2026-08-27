@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException, ConflictException } from '@nestjs/common';
+import { Injectable, BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { DatabaseService } from '../database/database.service';
 
@@ -48,9 +48,15 @@ export class TaskService {
             SELECT * FROM tasks WHERE id = $1;
         `;
 
-        const get_all_notes_id = await this.databaseService.query(sql_get_all_notes, [id]);
+        const get_all_notes_id_result = await this.databaseService.query(sql_get_all_notes, [id]);
 
-        return get_all_notes_id.rows;
+        if (get_all_notes_id_result.rows.length === 0) {
+            throw new NotFoundException(
+                'Task not found.'
+            )
+        }
+
+        return get_all_notes_id_result.rows[0];
     }
 
 }
