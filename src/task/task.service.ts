@@ -43,4 +43,14 @@ export class TaskService {
 
     }
 
+    async showTaskById(id : string) {
+        const sql_get_all_notes = `
+            SELECT * FROM tasks WHERE id = $1;
+        `;
+
+        const get_all_notes_id = await this.databaseService.query(sql_get_all_notes, [id]);
+
+        return get_all_notes_id.rows;
+    }
+
 }
