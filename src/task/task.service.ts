@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { DatabaseService } from '../database/database.service';
+import { UpdateUserTaskDto } from './dto/update-task.dto';
 
 @Injectable()
 export class TaskService {
@@ -58,5 +59,26 @@ export class TaskService {
 
         return get_all_notes_id_result.rows[0];
     }
+
+
+    async updateUsertask(id : string, updateUserDto :  UpdateUserTaskDto) {
+
+        const { title, description, completed } = updateUserDto;
+
+        const sql_update_task = `
+            UPDATE tasks SET title = $1, description = $2, completed = $3, updated_at = CURRENT_TIMESTAMP WHERE id = $4 RETURNING *;
+            `;
+
+        const update_task_result = await this.databaseService.query(sql_update_task, [title, description, completed, id]);
+
+        if (update_task_result.rows.length === 0) {
+            throw new NotFoundException(
+                'Task not found'
+            );
+        }
+
+        return update_task_result.rows[0];
+
+    } 
 
 }
