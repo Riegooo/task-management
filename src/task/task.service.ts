@@ -81,4 +81,22 @@ export class TaskService {
 
     } 
 
+    async deleteUserTask(id : string) {
+        
+        const sql_delete_task = `
+            DELETE FROM tasks WHERE id = $1;
+        `;
+
+        const delete_task_result = await this.databaseService.query(sql_delete_task, [id]);
+
+        if (delete_task_result.rows.length === 0) {
+            throw new NotFoundException(
+                'Task not found'
+            );
+        }
+
+        return delete_task_result.rows;
+
+    }
+
 }
