@@ -44,12 +44,12 @@ export class TaskService {
 
     }
 
-    async showTaskById(id : string) {
+    async showTaskById(id : string, userId : number) {
         const sql_get_all_notes = `
-            SELECT * FROM tasks WHERE id = $1;
+            SELECT * FROM tasks WHERE id = $1 AND user_id = $2;
         `;
 
-        const get_all_notes_id_result = await this.databaseService.query(sql_get_all_notes, [id]);
+        const get_all_notes_id_result = await this.databaseService.query(sql_get_all_notes, [id, userId]);
 
         if (get_all_notes_id_result.rows.length === 0) {
             throw new NotFoundException(
