@@ -61,7 +61,7 @@ export class TaskService {
     }
 
 
-    async updateUsertask(id : string, updateUserDto :  UpdateUserTaskDto) {
+    async updateUsertask(id : number, updateUserDto :  UpdateUserTaskDto) {
 
         const { title, description, completed } = updateUserDto;
 

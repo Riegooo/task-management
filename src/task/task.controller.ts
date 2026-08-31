@@ -37,7 +37,7 @@ export class TaskController {
     }
 
     @Patch('update/:id')
-    updateUSerTask(@Param('id', ParseIntPipe) id : string, @Body() updateUserTask : UpdateUserTaskDto ) {
+    updateUSerTask(@Param('id', ParseIntPipe) id : number, @Body() updateUserTask : UpdateUserTaskDto ) {
         return this.taskService.updateUsertask(id, updateUserTask);
     }
 
