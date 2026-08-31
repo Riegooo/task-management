@@ -20,16 +20,3 @@ export class CreateUserDto {
     confirmation_password!: string;
 
 }
-
-export class LogInUserDto {
-
-    @IsNotEmpty()
-    @IsString()
-    username!: string;
-
-    @IsNotEmpty()
-    @IsString()
-    @MinLength(8)
-    password!: string;
-    
-}
