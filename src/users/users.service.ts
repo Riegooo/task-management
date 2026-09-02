@@ -1,6 +1,7 @@
 import { Injectable, BadRequestException, ConflictException, UnauthorizedException } from '@nestjs/common';
 import { DatabaseService } from '../database/database.service';
-import { CreateUserDto, LogInUserDto } from './dto/user.dto';
+import { CreateUserDto } from './dto/user.dto';
+import { LogInUserDto } from './dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import bcrypt from 'bcrypt';
 
