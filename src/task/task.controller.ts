@@ -1,8 +1,9 @@
-import { Body, Controller, Post, Get, Param, Patch, ParseIntPipe, Delete, UseGuards, Req} from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Patch, ParseIntPipe, Delete, UseGuards, Req, UseInterceptors, Logger} from '@nestjs/common';
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateUserTaskDto } from './dto/update-task.dto';                                                                              
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { LoggingInterceptor } from '../common/interceptors/logging/logging.interceptor';
 
 
 @Controller('task')
@@ -28,6 +29,7 @@ export class TaskController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @UseInterceptors(LoggingInterceptor)
     @Get('show/:id')
     showTaskById(@Param('id', ParseIntPipe) id : string, @Req() req: any) {
 
